@@ -3,7 +3,6 @@ import CuentaCorriente from '../../Models/cuentaCorriente.js'
 import TarjetaCredito from '../../Models/tarjetaCredito.js'
 import EstadoCuenta from '../../Models/estadoCuenta.js'
 
-// Si no hay sesión activa redirigir al login
 const usuarioActual = sessionStorage.getItem('usuarioActual')
 if (!usuarioActual) window.location.href = '../login/login.html'
 
@@ -12,13 +11,11 @@ function esEntrada(tipo) {
     return tiposEntrada.some(t => tipo.toLowerCase().includes(t))
 }
 
-// Cargar todas las cuentas del usuario desde localStorage
 const todasLasCuentas = JSON.parse(localStorage.getItem('cuentas') || '[]')
 const cuentasUsuario = todasLasCuentas.filter(c => c.usuario === usuarioActual)
 
 let saldoVisible = true
 
-// Reconstruir una cuenta como instancia del modelo según su tipo
 function reconstruirCuenta(data) {
     if (data.tipo === 'ahorros')
         return new CuentaAhorros(new Date(), data.numeroCuenta, data.saldo, EstadoCuenta.ACTIVA, data.movimientos, 0.015)
@@ -30,15 +27,12 @@ function reconstruirCuenta(data) {
 
 let cuenta = reconstruirCuenta(cuentasUsuario.find(c => c.tipo === 'ahorros'))
 
-// Mostrar nombre del usuario
 document.getElementById('nombre-usuario').textContent = `Hola, ${usuarioActual}`
 actualizarSaldo()
 actualizarBotonesSidebar()
 mostrarNumeroCuenta()
 inicializarTarjetas()
 cargarActividadReciente()
-
-// ── SELECTOR ────────────────────────────────────────────────
 
 function inicializarTarjetas() {
     ;['ahorros', 'corriente', 'credito'].forEach(tipo => {
@@ -99,8 +93,6 @@ function accionRapida3() {
     mostrarSeccion(cuenta instanceof TarjetaCredito ? 'avance' : 'transferir')
 }
 
-// ── SALDO ────────────────────────────────────────────────────
-
 function actualizarSaldo() {
     const elSaldo = document.getElementById('valor-saldo')
     const elInfo = document.getElementById('info-credito')
@@ -133,7 +125,6 @@ function toggleSaldo() {
     actualizarSaldo()
 }
 
-// ── GUARDAR ──────────────────────────────────────────────────
 
 function guardarCuenta() {
     const cuentas = JSON.parse(localStorage.getItem('cuentas') || '[]')
@@ -146,7 +137,6 @@ function guardarCuenta() {
     }
 }
 
-// ── SECCIONES ────────────────────────────────────────────────
 
 function mostrarSeccion(id) {
     document.querySelectorAll('.seccion').forEach(s => s.classList.add('oculto'))
@@ -175,7 +165,6 @@ function montoRapido(inputId, valor) {
     input.value = (parseFloat(input.value) || 0) + valor
 }
 
-// ── OPERACIONES ──────────────────────────────────────────────
 
 function consignar() {
     limpiarError('error-consignar')
@@ -306,8 +295,6 @@ function transferir() {
     alert('Transferencia exitosa.')
 }
 
-// ── MOVIMIENTOS ──────────────────────────────────────────────
-
 function mostrarMovimientos(filtro = 'todos') {
     const lista = document.getElementById('lista-movimientos')
     lista.innerHTML = ''
@@ -363,7 +350,6 @@ function cargarActividadReciente() {
     })
 }
 
-// ── PERFIL ───────────────────────────────────────────────────
 
 function cargarPerfil() {
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]')
@@ -413,7 +399,6 @@ function cambiarContrasena() {
     document.getElementById('clave-confirmar').value = ''
 }
 
-// ── EXPONER AL HTML ──────────────────────────────────────────
 function cerrarSesion() {
     sessionStorage.removeItem('usuarioActual')
     window.location.href = '../login/login.html'

@@ -11,8 +11,6 @@ class TarjetaCredito extends Cuenta {
         this.numeroCuotas = numeroCuotas;
     }
 
-    // En una TC, "consignar" no existe como tal.
-    // Si alguien transfiere dinero a esta tarjeta, se aplica como pago (reduce deuda).
     consignar(valor) {
         if (this.estado === EstadoCuenta.ACTIVA) {
             const pagoReal = Math.min(valor, this.deuda)

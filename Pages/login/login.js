@@ -7,11 +7,9 @@ const inputUsuario = document.getElementById('usuario')
 const inputContraseña = document.getElementById('contraseña')
 const contadorIntentos = document.getElementById('contador-intentos')
 
-// Cargar usuarios guardados desde localStorage al banco
 const usuariosGuardados = JSON.parse(localStorage.getItem('usuarios') || '[]')
 usuariosGuardados.forEach(u => banco.registrar(u.identificacion, u.nombre, u.celular, u.usuario, u.contraseña))
 
-// Mostrar/ocultar contraseña
 function togglePassword(id, btn) {
     const input = document.getElementById(id)
     if (input.type === 'password') {
