@@ -658,3 +658,12 @@ nav {
 
     .actividad-reciente { padding: 16px 12px; }
 }
+
+.footer-simple {
+    text-align: center;
+    padding: 14px;
+    font-size: 12px;
+    color: #888;
+    border-top: 1px solid #e5e7eb;
+    margin-top: auto;
+}
