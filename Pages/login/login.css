@@ -1,0 +1,218 @@
+:root {
+    --azul: #2563eb;
+    --azul-dark: #1d4ed8;
+    --blanco: #ffffff;
+    --gris-100: #f8fafc;
+    --gris-200: #f1f5f9;
+    --gris-300: #e2e8f0;
+    --gris-texto: #475569;
+    --negro: #0f172a;
+    --error: #e74c3c;
+    --fuente: 'Segoe UI', Arial, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: var(--fuente);
+    background: var(--gris-100);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── NAVBAR ── */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--blanco);
+    padding: 0 40px;
+    height: 64px;
+    box-shadow: 0 1px 0 var(--gris-300);
+}
+
+.logo a {
+    color: var(--negro);
+    font-size: 18px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: var(--negro);
+    text-decoration: none;
+    padding: 8px 18px;
+    border: 1px solid var(--gris-300);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.nav-links a:hover { background: var(--gris-200); }
+
+/* ── MAIN ── */
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* ── CARD ── */
+.card {
+    background: var(--blanco);
+    border-radius: 16px;
+    padding: 44px 40px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+}
+
+.card h2 {
+    font-size: 26px;
+    color: var(--negro);
+    margin-bottom: 28px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* ── CAMPOS ── */
+.campo {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.campo label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gris-texto);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.campo input {
+    padding: 12px 14px;
+    border: 1.5px solid var(--gris-300);
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: var(--fuente);
+    transition: border 0.2s;
+    outline: none;
+    color: var(--negro);
+}
+
+.campo input:focus { border-color: var(--azul); }
+
+/* ── OJO ── */
+.input-eye {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-eye input { flex: 1; padding-right: 44px; }
+
+.btn-eye {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    line-height: 1;
+}
+
+/* ── ERRORES ── */
+.error {
+    font-size: 12px;
+    color: var(--error);
+    margin-top: 4px;
+    min-height: 16px;
+}
+
+/* ── CONTADOR ── */
+.contador {
+    font-size: 13px;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    min-height: 36px;
+}
+
+.contador.advertencia {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffc107;
+}
+
+.contador.bloqueado {
+    background: #fce8e8;
+    color: var(--error);
+    border: 1px solid var(--error);
+    font-weight: 600;
+}
+
+/* ── BOTÓN ── */
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: var(--azul);
+    color: var(--blanco);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 4px;
+}
+
+.btn-primary:hover {
+    background: var(--azul-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(37,99,235,0.35);
+}
+
+/* ── LINK ── */
+.link-registro {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 14px;
+    color: var(--gris-texto);
+}
+
+.link-registro a {
+    color: var(--azul);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.link-registro a:hover { text-decoration: underline; }
+
+/* ── RESPONSIVE MÓVIL (≤ 500px) ── */
+@media (max-width: 500px) {
+    nav { padding: 12px 18px; }
+    .logo a { font-size: 20px; }
+    .nav-links a { padding: 6px 12px; font-size: 13px; }
+    main { padding: 24px 16px; }
+    .card { padding: 28px 20px; border-radius: 12px; }
+    .card h2 { font-size: 22px; margin-bottom: 22px; }
+    .campo input { padding: 11px 12px; font-size: 14px; }
+    .btn-primary { font-size: 15px; padding: 13px; }
+}
+
+/* ── RESPONSIVE MÓVIL PEQUEÑO (≤ 360px) ── */
+@media (max-width: 360px) {
+    nav { padding: 10px 12px; }
+    .card { padding: 22px 14px; }
+    .card h2 { font-size: 19px; }
+    .campo label { font-size: 11px; }
+    .campo input { font-size: 13px; }
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Plata - Registro</title>
+    <link rel="stylesheet" href="registro.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><a href="../index/index.html">Mi Plata</a></div>
+        <div class="nav-links">
+            <a href="../login/login.html">Iniciar Sesión</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="card">
+            <h2>Crear Cuenta</h2>
+
+            <form id="form-registro">
+                <div class="campo">
+                    <label for="identificacion">Número de Identificación</label>
+                    <input type="text" id="identificacion" placeholder="Cédula o Pasaporte" required>
+                    <span class="error" id="error-identificacion"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" placeholder="Tu nombre completo" required>
+                    <span class="error" id="error-nombre"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="celular">Celular</label>
+                    <input type="text" id="celular" placeholder="Tu número de celular" required>
+                    <span class="error" id="error-celular"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" id="usuario" placeholder="Elige un nombre de usuario" required>
+                    <span class="error" id="error-usuario"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="contraseña">Contraseña</label>
+                    <div class="input-eye">
+                        <input type="password" id="contraseña" placeholder="Crea una contraseña" required>
+                        <button type="button" class="btn-eye" onclick="togglePassword('contraseña', this)">👁</button>
+                    </div>
+                    <span class="error" id="error-contrasena"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="confirmar">Confirmar contraseña</label>
+                    <div class="input-eye">
+                        <input type="password" id="confirmar" placeholder="Repite tu contraseña" required>
+                        <button type="button" class="btn-eye" onclick="togglePassword('confirmar', this)">👁</button>
+                    </div>
+                    <span class="error" id="error-confirmar"></span>
+                </div>
+
+                <button type="submit" class="btn-primary">Registrarse</button>
+            </form>
+
+            <p class="link-login">
+                ¿Ya tienes cuenta?
+                <a href="../login/login.html">Inicia sesión aquí</a>
+            </p>
+        </div>
+    </main>
+
+    <script type="module" src="registro.js"></script>
+</body>
+</html>

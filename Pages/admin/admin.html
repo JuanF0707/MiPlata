@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Plata - Administración</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    
+    <nav>
+        <div class="logo"><a href="../index/index.html">Mi Plata</a></div>
+        <div class="nav-links">
+            <a href="../panel/panel.html">Volver al Panel</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="admin-header">
+            <h2>Administración de Usuarios</h2>
+            <button class="btn-agregar" onclick="mostrarFormAgregar()">+ Agregar Usuario</button>
+        </div>
+
+        <div id="form-agregar" class="oculto">
+            <h3>Nuevo Usuario</h3>
+            <input type="text" id="agregar-identificacion" placeholder="Cédula o Pasaporte">
+            <input type="text" id="agregar-nombre" placeholder="Nombre completo">
+            <input type="text" id="agregar-celular" placeholder="Celular">
+            <input type="text" id="agregar-usuario" placeholder="Nombre de usuario">
+            <input type="password" id="agregar-contrasena" placeholder="Contraseña">
+            <input type="password" id="agregar-confirmar" placeholder="Confirmar contraseña">
+            <span class="error" id="error-agregar"></span>
+            <div class="form-botones">
+                <button onclick="guardarNuevoUsuario()">Guardar</button>
+                <button onclick="cancelarAgregar()">Cancelar</button>
+            </div>
+        </div>
+
+        <table id="tabla-usuarios">
+            <thead>
+                <tr>
+                    <th>Identificación</th>
+                    <th>Nombre</th>
+                    <th>Celular</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpo-tabla"></tbody>
+        </table>
+
+        <div id="form-edicion" class="oculto">
+            <h3>Editar Usuario</h3>
+            <input type="hidden" id="editar-usuario">
+            <input type="text" id="editar-nombre" placeholder="Nombre completo">
+            <input type="text" id="editar-celular" placeholder="Celular">
+            <button onclick="guardarEdicion()">Guardar</button>
+            <button onclick="cancelarEdicion()">Cancelar</button>
+        </div>
+    </main>
+
+    <script type="module" src="admin.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Plata - Panel</title>
+    <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+
+<nav>
+    <div class="logo">Mi Plata</div>
+    <div class="nav-links">
+        <span id="nombre-usuario">Hola, usuario</span>
+        <a href="#" id="btn-cerrar" onclick="cerrarSesion()">Cerrar Sesión</a>
+    </div>
+</nav>
+
+<div class="panel-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">Mi Plata</div>
+        <button class="sidebar-btn activo" onclick="mostrarSeccion('saldo')" id="btn-saldo">🏠 Inicio</button>
+        <button class="sidebar-btn" onclick="mostrarSeccion('consignar')" id="btn-consignar">💰 Consignar</button>
+        <button class="sidebar-btn" onclick="mostrarSeccion('retirar')" id="btn-retirar">💸 Retirar</button>
+        <button class="sidebar-btn" onclick="mostrarSeccion('comprar')" id="btn-comprar">🛍️ Comprar</button>
+        <button class="sidebar-btn" onclick="mostrarSeccion('pagar')" id="btn-pagar">💳 Pagar TC</button>
+        <button class="sidebar-btn" onclick="mostrarSeccion('avance')" id="btn-avance">💵 Avance TC</button>
+        <button class="sidebar-btn" onclick="mostrarSeccion('transferir')" id="btn-transferir">↗️ Transferir</button>
+        <button class="sidebar-btn" onclick="mostrarSeccion('movimientos')" id="btn-movimientos">📋 Movimientos</button>
+        <button class="sidebar-btn" onclick="mostrarSeccion('perfil')" id="btn-perfil">👤 Perfil</button>
+        <button class="sidebar-btn" onclick="window.location.href='../admin/admin.html'">⚙️ Administración</button>
+    </aside>
+
+    <!-- CONTENIDO -->
+    <main class="contenido">
+
+        <!-- SELECTOR DE CUENTA (tarjetas clicables) -->
+        <div class="selector-tarjetas">
+            <div class="mini-card mini-card--ahorros" onclick="cambiarCuenta('ahorros')" id="card-ahorros">
+                <div class="mini-card-top">
+                    <div class="mini-card-chip"></div>
+                    <span class="mini-card-logo">Mi Plata</span>
+                </div>
+                <div class="mini-card-bottom">
+                    <div class="mini-card-tipo">Cuenta de Ahorros</div>
+                    <div class="mini-card-numero" id="num-ahorros"></div>
+                </div>
+            </div>
+            <div class="mini-card mini-card--corriente" onclick="cambiarCuenta('corriente')" id="card-corriente">
+                <div class="mini-card-top">
+                    <div class="mini-card-chip"></div>
+                    <span class="mini-card-logo">Mi Plata</span>
+                </div>
+                <div class="mini-card-bottom">
+                    <div class="mini-card-tipo">Cuenta Corriente</div>
+                    <div class="mini-card-numero" id="num-corriente"></div>
+                </div>
+            </div>
+            <div class="mini-card mini-card--credito" onclick="cambiarCuenta('credito')" id="card-credito">
+                <div class="mini-card-top">
+                    <div class="mini-card-chip"></div>
+                    <span class="mini-card-logo">Mi Plata</span>
+                </div>
+                <div class="mini-card-bottom">
+                    <div class="mini-card-tipo">Tarjeta de Crédito</div>
+                    <div class="mini-card-numero" id="num-credito"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SALDO / INICIO -->
+        <section id="saldo" class="seccion">
+            <div class="saldo-card">
+                <div class="saldo-header">
+                    <span>Saldo disponible</span>
+                    <button class="btn-eye-saldo" onclick="toggleSaldo()" id="btn-toggle-saldo">👁</button>
+                </div>
+                <p id="valor-saldo" class="saldo-monto">$0</p>
+                <p id="info-credito" class="saldo-info"></p>
+                <p id="numero-cuenta-card" class="saldo-numero"></p>
+            </div>
+
+            <!-- ACCIONES RÁPIDAS -->
+            <div class="acciones-rapidas">
+                <button class="accion-btn" id="accion-btn-1" onclick="accionRapida1()">
+                    <span class="accion-icono" id="accion-icono-1">💰</span>
+                    <span id="accion-label-1">Consignar</span>
+                </button>
+                <button class="accion-btn" id="accion-btn-2" onclick="accionRapida2()">
+                    <span class="accion-icono" id="accion-icono-2">💸</span>
+                    <span id="accion-label-2">Retirar</span>
+                </button>
+                <button class="accion-btn" id="accion-btn-3" onclick="accionRapida3()">
+                    <span class="accion-icono" id="accion-icono-3">↗️</span>
+                    <span id="accion-label-3">Transferir</span>
+                </button>
+                <button class="accion-btn" onclick="mostrarSeccion('movimientos')">
+                    <span class="accion-icono">📋</span>
+                    <span>Actividad</span>
+                </button>
+            </div>
+
+            <!-- ACTIVIDAD RECIENTE -->
+            <div class="actividad-reciente">
+                <div class="actividad-header">
+                    <h3>Actividad reciente</h3>
+                    <button onclick="mostrarSeccion('movimientos')" class="ver-todos">Ver todos →</button>
+                </div>
+                <ul id="lista-reciente"></ul>
+            </div>
+        </section>
+
+        <!-- CONSIGNAR -->
+        <section id="consignar" class="seccion oculto">
+            <h2>Consignar Dinero</h2>
+            <p class="saldo-referencia">Saldo actual: <strong id="saldo-ref-consignar">$0</strong></p>
+            <div class="montos-rapidos">
+                <button onclick="montoRapido('monto-consignar', 50000)">+ $50.000</button>
+                <button onclick="montoRapido('monto-consignar', 100000)">+ $100.000</button>
+                <button onclick="montoRapido('monto-consignar', 500000)">+ $500.000</button>
+            </div>
+            <input type="number" id="monto-consignar" placeholder="$ Monto a consignar">
+            <span class="error" id="error-consignar"></span>
+            <button class="btn-primary" onclick="consignar()">Confirmar Depósito</button>
+        </section>
+
+        <!-- RETIRAR -->
+        <section id="retirar" class="seccion oculto">
+            <h2>Retirar Dinero</h2>
+            <p class="saldo-referencia">Saldo disponible: <strong id="saldo-ref-retirar">$0</strong></p>
+            <div class="montos-rapidos">
+                <button onclick="montoRapido('monto-retirar', 50000)">$50.000</button>
+                <button onclick="montoRapido('monto-retirar', 100000)">$100.000</button>
+                <button onclick="montoRapido('monto-retirar', 500000)">$500.000</button>
+            </div>
+            <input type="number" id="monto-retirar" placeholder="$ Monto a retirar">
+            <span class="error" id="error-retirar"></span>
+            <button class="btn-primary" id="btn-confirmar-retiro" onclick="retirar()">Confirmar Retiro</button>
+        </section>
+
+        <!-- COMPRAR -->
+        <section id="comprar" class="seccion oculto">
+            <h2>Comprar con Tarjeta</h2>
+            <p class="saldo-referencia">Cupo disponible: <strong id="saldo-ref-comprar">$0</strong></p>
+            <input type="number" id="monto-comprar" placeholder="$ Valor de la compra">
+            <input type="number" id="cuotas-comprar" placeholder="Número de cuotas">
+            <span class="error" id="error-comprar"></span>
+            <button class="btn-primary" onclick="comprar()">Comprar</button>
+            <div id="resultado-compra" class="resultado-compra oculto">
+                <p class="resultado-titulo">Resumen de la compra</p>
+                <p>Cuota mensual: <strong id="cuota-mensual-valor"></strong></p>
+                <p>Tasa aplicada: <strong id="tasa-aplicada-valor"></strong></p>
+            </div>
+        </section>
+
+        <!-- PAGAR TC -->
+        <section id="pagar" class="seccion oculto">
+            <h2>Pagar Tarjeta de Crédito</h2>
+            <p id="deuda-actual" class="saldo-referencia"></p>
+            <input type="number" id="monto-pagar" placeholder="$ Monto a pagar">
+            <span class="error" id="error-pagar"></span>
+            <button class="btn-primary" onclick="pagar()">Confirmar Pago</button>
+        </section>
+
+        <!-- AVANCE TC -->
+        <section id="avance" class="seccion oculto">
+            <h2>Avance en Efectivo</h2>
+            <p class="saldo-referencia">Cupo disponible: <strong id="saldo-ref-avance">$0</strong></p>
+            <div class="montos-rapidos">
+                <button onclick="montoRapido('monto-avance', 50000)">$50.000</button>
+                <button onclick="montoRapido('monto-avance', 100000)">$100.000</button>
+                <button onclick="montoRapido('monto-avance', 500000)">$500.000</button>
+            </div>
+            <input type="number" id="monto-avance" placeholder="$ Monto del avance">
+            <input type="number" id="cuotas-avance" placeholder="Número de cuotas">
+            <span class="error" id="error-avance"></span>
+            <button class="btn-primary" onclick="avance()">Confirmar Avance</button>
+            <div id="resultado-avance" class="resultado-compra oculto">
+                <p class="resultado-titulo">Resumen del avance</p>
+                <p>Cuota mensual: <strong id="cuota-avance-valor"></strong></p>
+                <p>Tasa aplicada: <strong>2.3% mensual (fija)</strong></p>
+            </div>
+        </section>
+
+        <!-- TRANSFERIR -->
+        <section id="transferir" class="seccion oculto">
+            <h2>Transferir</h2>
+            <p class="saldo-referencia">Saldo disponible: <strong id="saldo-ref-transferir">$0</strong></p>
+            <input type="text" id="cuenta-destino" placeholder="Número de cuenta destino">
+            <input type="number" id="monto-transferir" placeholder="$ Monto a transferir">
+            <span class="error" id="error-transferir"></span>
+            <button class="btn-primary" onclick="transferir()">Confirmar Transferencia</button>
+        </section>
+
+        <!-- MOVIMIENTOS -->
+        <section id="movimientos" class="seccion oculto">
+            <h2>Historial de Movimientos</h2>
+            <div class="filtros">
+                <button class="filtro-btn activo" onclick="filtrarMovimientos('todos', this)">Todos</button>
+                <button class="filtro-btn" onclick="filtrarMovimientos('entrada', this)">Entradas</button>
+                <button class="filtro-btn" onclick="filtrarMovimientos('salida', this)">Salidas</button>
+            </div>
+            <ul id="lista-movimientos"></ul>
+        </section>
+
+        <!-- PERFIL -->
+        <section id="perfil" class="seccion oculto">
+            <h2>Mi Perfil</h2>
+            <div class="campo">
+                <label>Identificación</label>
+                <input type="text" id="perfil-identificacion" placeholder="Cédula o pasaporte">
+            </div>
+            <div class="campo">
+                <label>Nombre completo</label>
+                <input type="text" id="perfil-nombre" placeholder="Nombre completo">
+            </div>
+            <div class="campo">
+                <label>Celular</label>
+                <input type="text" id="perfil-celular" placeholder="Celular">
+            </div>
+            <button class="btn-primary" onclick="guardarPerfil()">Guardar cambios</button>
+
+            <hr class="separador">
+
+            <h3>Cambiar Contraseña</h3>
+            <div class="campo">
+                <label>Contraseña actual</label>
+                <input type="password" id="clave-actual" placeholder="Contraseña actual">
+            </div>
+            <div class="campo">
+                <label>Nueva contraseña</label>
+                <input type="password" id="clave-nueva" placeholder="Nueva contraseña">
+            </div>
+            <div class="campo">
+                <label>Confirmar nueva contraseña</label>
+                <input type="password" id="clave-confirmar" placeholder="Confirmar nueva contraseña">
+            </div>
+            <span class="error" id="error-password"></span>
+            <button class="btn-primary" onclick="cambiarContrasena()">Cambiar Contraseña</button>
+        </section>
+
+    </main>
+</div>
+
+<script type="module" src="panel.js"></script>
+</body>
+</html>

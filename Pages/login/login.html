@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Plata - Iniciar Sesión</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><a href="../index/index.html">Mi Plata</a></div>
+        <div class="nav-links">
+            <a href="../registro/registro.html">Registrarse</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="card">
+            <h2>Iniciar Sesión</h2>
+
+            <form id="form-login">
+                <div class="campo">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" id="usuario" placeholder="Tu nombre de usuario" required>
+                    <span class="error" id="error-usuario"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="contraseña">Contraseña</label>
+                    <div class="input-eye">
+                        <input type="password" id="contraseña" placeholder="Tu contraseña" required>
+                        <button type="button" class="btn-eye" onclick="togglePassword('contraseña', this)">👁</button>
+                    </div>
+                    <span class="error" id="error-contrasena"></span>
+                </div>
+
+                <div id="contador-intentos" class="contador"></div>
+
+                <button type="submit" class="btn-primary">Ingresar</button>
+            </form>
+
+            <p class="link-registro">
+                ¿No tienes cuenta?
+                <a href="../registro/registro.html">Regístrate aquí</a>
+            </p>
+        </div>
+    </main>
+
+    <script type="module" src="login.js"></script>
+</body>
+</html>
